@@ -5,8 +5,6 @@ import com.example.Spring_boot.repositories.PassportRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Service
@@ -17,9 +15,6 @@ public class PassportServiceImpl implements PassportService {
     public PassportServiceImpl(PassportRepository passportRepository) {
         this.passportRepository = passportRepository;
     }
-
-    @PersistenceContext
-    private EntityManager entityManager;
 
     @Override
     public List<Passport> getAllPassports() {

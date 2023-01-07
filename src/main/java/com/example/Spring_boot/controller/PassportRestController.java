@@ -7,9 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
-//@RestController
-//@RequestMapping("/api")
+//@Controller
+@RestController
+@RequestMapping("/api")
 public class PassportRestController {
 
     private final PassportService passportService;

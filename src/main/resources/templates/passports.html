@@ -57,9 +57,11 @@
                 <input type="submit" value="Edit">
             </a></td>
 
-            <td><form th:method="DELETE" th:action="@{/{id}/delete(id=${passport.getId()})}">
-                <input type="submit" value="Delete">
-            </form></td>
+            <td>
+                <form th:method="DELETE" th:action="@{/{id}/delete(id=${passport.getId()})}">
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
 
         </tr>
     </table>

@@ -21,41 +21,42 @@ public class Passport {
     private long id;
 
     @NonNull
-    @Column (name = "type")
+    @Column(name = "type")
     private String type; // тип
     @NonNull
-    @Column (name = "codeOfIssuingState")
+    @Column(name = "codeOfIssuingState")
     private String codeOfIssuingState; // код государства выдачи
     @NonNull
-    @Column (name = "passportNo")
+    @Column(name = "passportNo")
     private int passportNo; // № паспорта
     @NonNull
-    @Column (name = "surname")
+    @Column(name = "surname")
     private String surname; // фамилия
     @NonNull
-    @Column (name = "givenNames")
+    @Column(name = "givenNames")
     private String givenNames; // имя
     @NonNull
-    @Column (name = "nationality")
+    @Column(name = "nationality")
     private String nationality; // гражданство
     @NonNull
-    @Column (name = "personalNo")
+    @Column(name = "personalNo")
     private int personalNo; // личный код
     @NonNull
-    @Column (name = "dateOfBirth")
+    @Column(name = "dateOfBirth")
     private String dateOfBirth; // дата рождения
     @NonNull
-    @Column (name = "placeOfBirth")
+    @Column(name = "placeOfBirth")
     private String placeOfBirth; // место рождения
-    @NonNull@Column (name = "sex")
+    @NonNull
+    @Column(name = "sex")
     private String sex; // пол
     @NonNull
-    @Column (name = "dateOfIssue")
+    @Column(name = "dateOfIssue")
     private String dateOfIssue; // дата выдачи
     @NonNull
-    @Column (name = "dateOfExpiry")
+    @Column(name = "dateOfExpiry")
     private String dateOfExpiry; // дата окончания срока действия
     @NonNull
-    @Column (name = "authority")
+    @Column(name = "authority")
     private String authority; // орган выдавший документ
 }
