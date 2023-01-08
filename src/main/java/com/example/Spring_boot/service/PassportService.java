@@ -2,19 +2,18 @@ package com.example.Spring_boot.service;
 
 import com.example.Spring_boot.entities.Passport;
 
-import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 public interface PassportService {
-    List<Passport> getAllPassports();
 
-    void save(Passport passport);
+    List<Passport> findAllPassports();
 
-    Passport findById(long id);
+    Optional<Passport> getOnePassport(Long id);
 
-    void update(long id, Passport updatePassport);
+    Passport insertPassport(Passport passport);
 
-    void delete(long id);
+    Passport updatePassport(Passport passport);
 
-    Passport isExistById(Passport passport);
+    void deletePassport(Long id);
 }

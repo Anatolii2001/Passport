@@ -3,15 +3,16 @@ package com.example.Spring_boot.controller;
 import com.example.Spring_boot.entities.Passport;
 import com.example.Spring_boot.service.PassportService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-//@Controller
-@RestController
-//@RequestMapping("/api")
-public class PassportRestController {
+import java.util.List;
+import java.util.Optional;
 
+@RestController
+@RequestMapping("/api")
+public class PassportRestController {
     private final PassportService passportService;
 
     @Autowired
@@ -19,51 +20,29 @@ public class PassportRestController {
         this.passportService = passportService;
     }
 
-    @GetMapping(value = "/")
-    public String print(ModelMap model) {
-        model.addAttribute("passports", passportService.getAllPassports());
-        return "passports";
-    }
-
     @GetMapping(value = "/passports")
-    public String printPassports(ModelMap model) {
-        model.addAttribute("passports", passportService.getAllPassports());
-        return "passports";
+    public ResponseEntity<List<Passport>> findAll() {
+        return ResponseEntity.ok(passportService.findAllPassports());
     }
 
-    @GetMapping(value = "/new")
-    public String newPassport(ModelMap model) {
-        model.addAttribute("passport", new Passport());
-        return "new";
+    @GetMapping("/passports/{id}")
+    public ResponseEntity<Optional<Passport>> getOne(@PathVariable Long id) {
+        return ResponseEntity.ok(passportService.getOnePassport(id));
     }
 
-    @PostMapping(value = "/passports")
-    public String saveNewPassport(@ModelAttribute("passport") Passport passport) {
-        passportService.save(passport);
-        return "redirect:/passports";
+    @PostMapping("/passports")
+    public ResponseEntity<Passport> insert(@RequestBody Passport passport) {
+        return ResponseEntity.ok(passportService.insertPassport(passport));
     }
 
-    @GetMapping(value = "/{id}/edit")
-    public String edit(ModelMap model, @PathVariable("id") long id) {
-        model.addAttribute("passport", passportService.findById(id));
-        return "edit";
+    @PutMapping("/passports")
+    public ResponseEntity<Passport> update(@RequestBody Passport passport) {
+        return ResponseEntity.ok(passportService.updatePassport(passport));
     }
 
-    @PostMapping(value = "/passports/{id}")
-    public String update(@ModelAttribute("passport") Passport passport, @PathVariable("id") long id) {
-        passportService.update(id, passport);
-        return "redirect:/passports";
-    }
-
-    @PostMapping(value = "/{id}/delete")
-    public String delete(@PathVariable("id") long id) {
-        passportService.delete(id);
-        return "redirect:/passports";
-    }
-
-    @PostMapping(value = "/delete")
-    public String isExistById(@PathVariable Passport passport) {
-        passportService.delete(passport.getId());
-        return "redirect:/passports";
+    @DeleteMapping("/passports/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        passportService.deletePassport(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

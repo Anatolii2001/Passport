@@ -2,51 +2,43 @@ package com.example.Spring_boot.service;
 
 import com.example.Spring_boot.entities.Passport;
 import com.example.Spring_boot.repositories.PassportRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PassportServiceImpl implements PassportService {
-
     private final PassportRepository passportRepository;
 
+    @Autowired
     public PassportServiceImpl(PassportRepository passportRepository) {
         this.passportRepository = passportRepository;
     }
 
     @Override
-    public List<Passport> getAllPassports() {
+    public List<Passport> findAllPassports() {
         return passportRepository.findAll();
     }
 
     @Override
-    @Transactional
-    public void save(Passport passport) {
-        passportRepository.save(passport);
+    public Optional<Passport> getOnePassport(Long id) {
+        return Optional.ofNullable(passportRepository.findPassportById(id));
     }
 
     @Override
-    public Passport findById(long id) {
-        return passportRepository.findPassportById(id);
+    public Passport insertPassport(Passport passport) {
+        return passportRepository.save(passport);
     }
 
     @Override
-    @Transactional
-    public void update(long id, Passport updatePassport) {
-        passportRepository.save(updatePassport);
+    public Passport updatePassport(Passport passport) {
+        return passportRepository.save(passport);
     }
 
     @Override
-    @Transactional
-    public void delete(long id) {
+    public void deletePassport(Long id) {
         passportRepository.deleteById(id);
-    }
-
-    @Override
-    @Transactional
-    public Passport isExistById(Passport passport) {
-        return passportRepository.findPassportById(passport.getId());
     }
 }
