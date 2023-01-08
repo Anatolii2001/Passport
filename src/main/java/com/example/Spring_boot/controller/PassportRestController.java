@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 //@Controller
 @RestController
-@RequestMapping("/api")
+//@RequestMapping("/api")
 public class PassportRestController {
 
     private final PassportService passportService;
@@ -17,6 +17,12 @@ public class PassportRestController {
     @Autowired
     public PassportRestController(PassportService passportService) {
         this.passportService = passportService;
+    }
+
+    @GetMapping(value = "/")
+    public String print(ModelMap model) {
+        model.addAttribute("passports", passportService.getAllPassports());
+        return "passports";
     }
 
     @GetMapping(value = "/passports")

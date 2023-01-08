@@ -2,6 +2,7 @@ package com.example.Spring_boot.service;
 
 import com.example.Spring_boot.entities.Passport;
 
+import javax.validation.Valid;
 import java.util.List;
 
 public interface PassportService {
