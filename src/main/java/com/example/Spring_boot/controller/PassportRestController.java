@@ -3,8 +3,6 @@ package com.example.Spring_boot.controller;
 import com.example.Spring_boot.entities.Passport;
 import com.example.Spring_boot.service.PassportService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,6 +11,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api")
 public class PassportRestController {
+
     private final PassportService passportService;
 
     @Autowired
@@ -21,28 +20,31 @@ public class PassportRestController {
     }
 
     @GetMapping(value = "/passports")
-    public ResponseEntity<List<Passport>> findAll() {
-        return ResponseEntity.ok(passportService.findAllPassports());
+    public List<Passport> findAll() {
+        return passportService.findAllPassports();
     }
 
     @GetMapping("/passports/{id}")
-    public ResponseEntity<Optional<Passport>> getOne(@PathVariable Long id) {
-        return ResponseEntity.ok(passportService.getOnePassport(id));
+    public Optional<Passport> getOnePassport(@PathVariable long id) {
+        return passportService.getOnePassport(id);
     }
 
     @PostMapping("/passports")
-    public ResponseEntity<Passport> insert(@RequestBody Passport passport) {
-        return ResponseEntity.ok(passportService.insertPassport(passport));
+    public Passport insertPassport(@RequestBody Passport passport) {
+        passportService.insertPassport(passport);
+        return passport;
     }
 
     @PutMapping("/passports")
-    public ResponseEntity<Passport> update(@RequestBody Passport passport) {
-        return ResponseEntity.ok(passportService.updatePassport(passport));
+    public Passport updatePassport(@RequestBody Passport passport) {
+        passportService.updatePassport(passport);
+        return passport;
     }
 
     @DeleteMapping("/passports/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public String deletePassport(@PathVariable long id) {
+        Optional<Passport> passport = passportService.getOnePassport(id);
         passportService.deletePassport(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return "Employee with ID = " + id + " was deleted";
     }
 }

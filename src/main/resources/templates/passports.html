@@ -54,12 +54,12 @@
             <td th:utext="${passport.getDateOfExpiry()}"></td>
             <td th:utext="${passport.getAuthority()}"></td>
 
-            <td><a th:href="@{/{id}/edit(id=${passport.getId()})}">
+            <td><a th:href="@{/{id}/insertPassport(id=${passport.getId()})}">
                 <input type="submit" value="Edit">
             </a></td>
 
             <td>
-                <form th:method="DELETE" th:action="@{/{id}/delete(id=${passport.getId()})}">
+                <form th:method="DELETE" th:action="@{/{id}/deletePassport(id=${passport.getId()})}">
                     <input type="submit" value="Delete">
                 </form>
             </td>
@@ -67,7 +67,7 @@
         </tr>
     </table>
     <br/>
-    <a href="/api/new">
+    <a href="/getPage">
         <input type="submit" value="Create new user">
     </a>
 </div>
